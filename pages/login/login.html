@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studious | Login</title>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/code/imgs/favcons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/code/imgs/favcons/favicon-16x16.png">
-    <link rel="manifest" href="/code/imgs/favcons/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/imgs/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/imgs/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/public/imgs/favicons/site.webmanifest">
 
     <link rel="stylesheet" href="login.css">
 </head>
@@ -22,7 +22,7 @@
             <input type="password" id="password" name="password" required placeholder="Password">
 
             <button type="submit" id="loginButton">Login</button>
-            <p class="foot">Don't have an account? <a id="signupLink" href="signup.html">Sign up</a></p>
+            <p class="foot">Don't have an account? <a id="signupLink" href="/login/signup.html">Sign up</a></p>
         </form>
     </div>
 
@@ -35,28 +35,24 @@
             const signupLink = document.getElementById("signupLink");
             
             if (role === "student") {
-                signupLink.href = "signup.html?role=student";
+                signupLink.href = "/login/signup.html?role=student";
                 document.getElementById("roleLabel").textContent = "Login as Student";
             } else if (role === "admin") {
-                signupLink.href = "signup.html?role=admin";
+                signupLink.href = "/login/signup.html?role=admin";
                 document.getElementById("roleLabel").textContent = "Login as Admin";
             }
     
-            // Add event listener for form submission
             form.addEventListener("submit", function(e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
     
-                // Get username and password
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
     
-                // Basic validation (you'd typically do more robust validation)
                 if (username && password) {
-                    // Redirect based on role and redirect parameter
                     if (role === "student") {
-                        window.location.href = redirect || "../student/home-student.html";
+                        window.location.href = redirect || "/student/home-student.html";
                     } else if (role === "admin") {
-                        window.location.href = redirect || "../admin/home-admin.html";
+                        window.location.href = redirect || "/admin/home-admin.html";
                     } else {
                         alert("Please Select a Role (Student or Admin)");
                     }
@@ -66,6 +62,5 @@
             });
         });
     </script>
-    
 </body>
 </html>

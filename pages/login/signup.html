@@ -1,4 +1,3 @@
-<!-- signup.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Studious | Sign Up</title>
 
-    <link rel="icon" type="image/png" sizes="32x32" href="/code/imgs/favcons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/code/imgs/favcons/favicon-16x16.png">
-    <link rel="manifest" href="/code/imgs/favcons/site.webmanifest">
+    <link rel="icon" type="image/png" sizes="32x32" href="/public/imgs/favicons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/public/imgs/favicons/favicon-16x16.png">
+    <link rel="manifest" href="/public/imgs/favicons/site.webmanifest">
 
     <link rel="stylesheet" href="login.css">
 </head>
@@ -29,7 +28,7 @@
             <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm Password">
 
             <button type="submit">Sign Up</button>
-            <p class="foot">Already have an account? <a id="loginLink" href="login.html">Log in</a></p>
+            <p class="foot">Already have an account? <a id="loginLink" href="/login/login.html">Log in</a></p>
         </form>
     </div>
 
@@ -42,41 +41,35 @@
             
             if (role === "student") {
                 form.action = "/create-student-account";
-                loginLink.href = "login.html?role=student";
+                loginLink.href = "/login/login.html?role=student";
                 document.getElementById("roleLabel").textContent = "Sign Up as Student";
             } else if (role === "admin") {
                 form.action = "/create-admin-account";
-                loginLink.href = "login.html?role=admin";
+                loginLink.href = "/login/login.html?role=admin";
                 document.getElementById("roleLabel").textContent = "Sign Up as Admin";
             }
     
-            // Add event listener for form submission
             form.addEventListener("submit", function(e) {
-                e.preventDefault(); // Prevent default form submission
+                e.preventDefault();
     
-                // Get form values
                 const username = document.getElementById("username").value;
                 const email = document.getElementById("email").value;
                 const password = document.getElementById("password").value;
                 const confirmPassword = document.getElementById("confirm-password").value;
     
-                // Basic validation
                 if (username && email && password && confirmPassword) {
                     if (password !== confirmPassword) {
                         alert("Passwords Do Not Match");
                         return;
                     }
     
-                    // If all validations pass, simulate form submission
-                    alert("Account Created Successfully!"); // Placeholder for actual account creation logic
-                    // You can replace the alert with an actual form submission if needed
-                    form.submit(); // Uncomment if you want to submit the form normally
+                    alert("Account Created Successfully!");
+                    form.submit();
     
-                    // Redirect after successful signup
                     if (role === "student") {
-                        window.location.href = "../student/home-student.html"; // Redirect to student home
+                        window.location.href = "/student/home-student.html";
                     } else if (role === "admin") {
-                        window.location.href = "../admin/home-admin.html"; // Redirect to admin home
+                        window.location.href = "/admin/home-admin.html";
                     }
                 } else {
                     alert("Please Fill In All Fields");
