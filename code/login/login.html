@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studious | Login</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/code/imgs/favcons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/code/imgs/favcons/favicon-16x16.png">
+    <link rel="manifest" href="/code/imgs/favcons/site.webmanifest">
+
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="login-container">
+        <h2>Login</h2>
+        <form id="loginForm" method="POST">
+            <label id="roleLabel" for="username">Login as Student/Admin</label>
+            <input type="text" id="username" name="username" required placeholder="Username">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Password">
+
+            <button type="submit" id="loginButton">Login</button>
+            <p class="foot">Don't have an account? <a id="signupLink" href="signup.html">Sign up</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const role = params.get("role");
+            const redirect = params.get("redirect");
+            const form = document.getElementById("loginForm");
+            const signupLink = document.getElementById("signupLink");
+            
+            if (role === "student") {
+                signupLink.href = "signup.html?role=student";
+                document.getElementById("roleLabel").textContent = "Login as Student";
+            } else if (role === "admin") {
+                signupLink.href = "signup.html?role=admin";
+                document.getElementById("roleLabel").textContent = "Login as Admin";
+            }
+    
+            // Add event listener for form submission
+            form.addEventListener("submit", function(e) {
+                e.preventDefault(); // Prevent default form submission
+    
+                // Get username and password
+                const username = document.getElementById("username").value;
+                const password = document.getElementById("password").value;
+    
+                // Basic validation (you'd typically do more robust validation)
+                if (username && password) {
+                    // Redirect based on role and redirect parameter
+                    if (role === "student") {
+                        window.location.href = redirect || "../student/home-student.html";
+                    } else if (role === "admin") {
+                        window.location.href = redirect || "../admin/home-admin.html";
+                    } else {
+                        alert("Please Select a Role (Student or Admin)");
+                    }
+                } else {
+                    alert("Please Enter Username and Password");
+                }
+            });
+        });
+    </script>
+    
+</body>
+</html>

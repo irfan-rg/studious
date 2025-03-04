@@ -1,0 +1,950 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recents</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/code/imgs/favcons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/code/imgs/favcons/favicon-16x16.png">
+    <link rel="manifest" href="/code/imgs/favcons/site.webmanifest">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+    <style>
+    /* General Reset */
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Roboto', sans-serif;
+    }
+
+    body {
+        background-color: #f4f4f9;
+        color: #333;
+    }
+
+    /* Layout */
+    .container {
+        display: flex;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        width: 250px;
+        background-color: #333;
+        color: #fff;
+        height: 100vh;
+        position: fixed;
+        padding: 10px;
+    }
+
+    /* Sidebar icons */
+    .side-icon {
+        width: 24px; /* Adjust size as needed for sidebar icons */
+        height: 24px; /* Adjust size as needed for sidebar icons */
+        margin-right: 10px;
+        vertical-align: middle;
+        margin-top: -6px; /* Move the sidebar icon slightly upwards */
+    }
+
+    .logo {
+        display: flex;
+        align-items: center;
+        font-size: 24px;
+        font-weight: 700;
+        color: var(--primary-color);
+        margin-bottom: 10%;
+    }
+
+    .logo img {
+        height: 135px;
+        /* margin-right: 10px; */
+        border-radius: 8%;
+    }
+
+
+    nav ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .nav ul li {
+        margin: 15px 0;
+    }
+
+    nav a {
+        color: white;
+        font-size:larger;
+        font-family: 'Poppins', sans-serif;
+        font-weight:550;
+        text-decoration: none;
+        display: block;
+        padding: 12px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+    }
+
+    nav a:hover {
+        background-color: #444;
+    }
+
+    /* Main Content */
+    main {
+        margin-left: 250px; /* Space for sidebar */
+        padding: 20px;
+        width: calc(100% - 250px);
+    }
+
+    .top-header {
+        display: flex;
+        justify-content: flex-end; /* Aligns everything to the right */
+        align-items: center;
+        padding: 0px 20px;
+        padding-bottom: 20px;
+        position: relative;
+        z-index: 10;
+    }
+
+    .user-menu {
+        display: flex;
+        align-items: center;
+        margin-right: -10px; /* Ensure notification and profile stay in place */
+    }
+
+    /* Search Section */
+    #search {
+        padding: 0; /* Remove padding to reduce empty space */
+        margin: 0; /* Ensure no margins are pushing the search bar down */
+        display: flex; /* Use flexbox */
+        justify-content: center; /* Center the search container */
+        align-items: center; /* Align items vertically in the center */
+    }
+
+    .search-container {
+        position: absolute;
+        left: 0;
+        display: flex;
+        max-width: 600px; /* Limit the width of the search container */
+        width: 100%; /* Allow it to fill the available space */
+    }
+
+    .search-container input {
+        flex-grow: 1; /* Allow the input to take remaining space */
+        padding: 0.75rem; /* Adjust padding */
+        font-size: 1rem; /* Adjust font size */
+        border: 2px solid #ddd; /* Change border color */
+        border-radius: 5px 0 0 5px; /* Rounded left corners */
+        margin-right: -1px; /* To avoid double border with button */
+    }
+
+    .search-container button {
+        background-color: #5d8aa8; /* Button background color */
+        color: white; /* Button text color */
+        border: none; /* Remove border */
+        padding: 0.75rem; /* Match input padding */
+        border-radius: 0 5px 5px 0; /* Rounded right corners */
+        cursor: pointer; /* Change cursor on hover */
+    }
+
+    .search-container button:hover {
+        background-color: #4b6e82; /* Darker shade on hover */
+    }
+
+    /* Upload Icon */
+    .action-button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 40px;
+        background-color: #f5f5f5;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 15px;
+        color: #333;
+        font-weight: bold;
+        transition: all 0.2s ease;
+        box-shadow: 0 1px 2px rgba(0,0,0,0.1);
+    }
+
+    .action-button:hover {
+        background-color: #e8e8e8;
+        transform: translateY(-1px);
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .action-icon {
+        width: 18px;
+        height: 18px;
+        opacity: 0.9;
+    }
+
+    /* Notification Styles */
+    .notification {
+        position:relative;
+        display: inline-block;
+        scale: 1.2;
+        margin-right:20px;
+    }
+
+    .notification-icon {
+        background: none;
+        border: none;
+        font-size: 24px;
+        cursor: pointer;
+        margin-left: 20px; /* Space from the account button */
+    }
+
+    .notification-dropdown {
+        font-size: 13px;
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        min-width: 200px; /* Set minimum width */
+        border-radius: 5px;
+    }
+
+    .notification-dropdown p {
+        padding: 10px;
+        margin: 0;
+    }
+
+    .notification-dropdown .notification-item {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    .notification-dropdown .notification-item:last-child {
+        border-bottom: none; /* Remove border for last item */
+    }
+
+    /* Profile Picture Styles */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .profile-pic {
+        width: 40px; /* Adjust size */
+        height: 40px; /* Adjust size */
+        border-radius: 50%; /* Circular profile picture */
+        cursor: pointer;
+        border: 2.5px solid #333;
+    }
+
+    .profile-dropdown {
+        display: none;
+        position: absolute;
+        right: 0;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1;
+        min-width: 150px; /* Set minimum width */
+        border-radius: 5px;
+    }
+
+    .profile-dropdown a {
+        display: block;
+        padding: 10px;
+        text-decoration: none;
+        color: black;
+    }
+
+    .profile-dropdown a:hover {
+        background-color: #f1f1f1; /* Change background on hover */
+    }
+
+    .hero-others {
+        height: 300px; /* Set a larger height for the Categories hero */
+        background-image: url('/code/imgs/nl2.jpg'); /* Set a background image if needed */
+        background-size: cover; /* Ensure the image covers the whole area */
+        background-position: center; /* Center the background image */
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        text-align: center;
+    }
+
+    .hero-content {
+        background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+        padding: 20px;
+        border-radius: 10px;
+        position: relative; /* Keep this as relative to maintain layout */
+        z-index: 1; /* Ensure content is above the background image */
+    }
+
+
+
+    /* Style for Recents Page */
+    #books-search {
+        margin-top: 25px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 30px;
+    }
+
+    #books-search h2 {
+        margin-top: 5px;
+        margin-bottom: 15px;
+        color: #333;
+    }
+
+    #books-search form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #books-search .search-bar {
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    select {
+        padding: 12px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 16px;
+    }
+
+    .btn {
+        padding: 12px 20px;
+        border: none;
+        border-radius: 4px;
+        background-color: #007bff;
+        color: white;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background 0.3s;
+    }
+
+    .btn:hover {
+        background-color: #0056b3;
+    }
+
+    .recents-page {
+        font-size: medium  ;
+        margin: 10px; /* Center the carousel */
+        width: 98%; /* Full width with some margin */
+    }
+    .recents-page h2{ 
+        font-size: x-large;
+        margin-bottom: 10px;
+    }
+
+    .recently-viewed-items {
+        display: flex; /* Keep horizontal layout */
+        padding: 10px 0; /* Add some padding */
+        padding-bottom: 30px;
+    }
+
+    .recent-card {
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 10px; /* Slightly reduce padding */
+        margin-right: 35px; /* Space between cards */
+        width: 200px; /* Set a smaller minimum width for cards */
+        flex-shrink: 0; /* Prevent cards from shrinking */
+        text-align: center;
+        transition: transform 0.2s, box-shadow 0.2s; /* Add transition for hover effect */
+    }
+
+    .recent-card:hover {
+        transform: translateY(-5px); /* Lift the card on hover */
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+    }
+
+    .recent-card img {
+        width: 100%; /* Set the width of the image to be less than the card */
+        height: 60%; /* Keep the aspect ratio */
+        border-radius: 5px;
+    }
+
+    .recent-card h3 {
+        font-size: 1em; /* Reduce font size */
+        margin: 5px 0 5px;
+    }
+
+    .recent-card p {
+        color: #666;
+        font-size: 0.9em; /* Slightly smaller font size for the description */
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        background-color: #333;
+        color: white;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+    .overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    .overlay-content {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        width: 500px;
+        max-width: 90%;
+        max-height: 90vh;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow-y: auto;
+        text-align: center;
+    }
+
+    .close-btn {
+        position: absolute;
+        margin-left: 190px;
+        font-size: 1.5rem;
+        background: none;
+        border: none;
+        cursor: pointer;
+        color: #171717;
+    }
+
+    .profile-section {
+        margin-bottom: 2rem;
+    }
+
+    .profile-section .profile-pic {
+        width: 100px;
+        height: 100px;
+        border-radius: 20%;
+        object-fit: cover;
+        margin-bottom: 1rem;
+    }
+
+    .profile-section h2 {
+        margin: 0;
+        color: #333;
+        font-size: 1.5rem;
+    }
+
+    .account-info {
+        text-align: left;
+    }
+
+    .info-group {
+        margin-bottom: 1rem;
+    }
+
+    .info-group label {
+        display: block;
+        font-weight: 500;
+        color: #2d2d2d;
+        margin-left: 5px;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+    }
+    .info-box {
+        background-color: #f8f9fa;
+        border: 1px solid #e2e8f0;
+        border-radius: 6px;
+        padding: 0.75rem 1rem;
+        color: #333;
+        font-size: 1rem;
+        width: 100%;
+        text-align: left;
+    }
+
+    .info-group p {
+        margin: 0;
+        color: #333;
+        font-size: 1rem;
+    }
+
+    .change-password-btn {
+        background: none;
+        border: none;
+        color: #007bff;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 5px;
+        font-size: 0.9rem;
+        margin-top: 10px;
+    }
+
+    .change-password-btn:hover {
+        text-decoration: underline;
+    }
+
+    #passwordChangeSection {
+        margin-top: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1rem;
+    }
+
+    .form-group input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-bottom: 1rem;
+    }
+
+    .submit-btn {
+        width: 100%;
+        padding: 0.75rem;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 4px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background-color: #0056b3;
+    }
+
+    /* Settings specific styles */
+    .settings-header {
+        text-align: left;
+        margin-bottom: 1.5rem;
+    }
+
+    .settings-header h2 {
+        margin: 0;
+        color: #333;
+        font-size: 1.7rem;
+    }
+
+    .settings-sections {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .settings-group {
+        border-bottom: 1px solid #eee;
+        padding-bottom: 1.5rem;
+    }
+
+    .settings-group:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .settings-label {
+        display: block;
+        font-size: large;
+        font-weight: 600;
+        color: #333;
+        margin-bottom: 1rem;
+    }
+
+    .settings-options {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+    }
+
+    .setting-item {
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+        padding: 0.5rem;
+        border-radius: 6px;
+        transition: background-color 0.2s;
+    }
+
+    .setting-item:hover {
+        background-color: #f8f9fa;
+    }
+
+    .setting-info {
+        flex: 1;
+    }
+
+    .setting-info span {
+        display: block;
+        font-weight: 500;
+        color: #333;
+        margin-bottom: 0.25rem;
+    }
+
+    .setting-description {
+        margin: 0;
+        font-size: 0.85rem;
+        color: #666;
+    }
+
+    /* Toggle Switch */
+    .toggle {
+        position: relative;
+        display: inline-block;
+        width: 44px;
+        height: 24px;
+    }
+
+    .toggle input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .toggle-slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        transition: .4s;
+        border-radius: 24px;
+    }
+
+    .toggle-slider:before {
+        position: absolute;
+        content: "";
+        height: 18px;
+        width: 18px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .4s;
+        border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+        background-color: #2d2d2d;
+    }
+
+    input:checked + .toggle-slider:before {
+        transform: translateX(20px);
+    }
+
+    /* Select dropdown */
+    .settings-select {
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 0.9rem;
+        color: #333;
+        background-color: white;
+        min-width: 120px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="/code/imgs/logo/logo.png" alt="Studious Logo">
+            </div>
+            <nav class="vertical-nav">
+                <ul>
+                    <li><a href="home-student.html"><img src="/code/icons/home.png" alt="" class="side-icon">Home</a></li>
+                    <li><a href="categories.html"><img src="/code/icons/categories.png" alt="" class="side-icon">Category</a></li>
+                    <li><a href="my-library.html"><img src="/code/icons/my_library.png" alt="" class="side-icon">My Library</a></li>
+                    <li><a href="books.html"><img src="/code/icons/books.png" alt="" class="side-icon">Books</a></li>
+                    <li><a href="recents.html"><img src="/code/icons/recents.png" alt="" class="side-icon">Recents</a></li>
+                    <li><a href="about.html"><img src="/code/icons/about_us.png" alt="" class="side-icon">About</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <main>
+            <header class="top-header">
+                <div class="user-menu">
+
+                    <section id="search">
+                        <div class="search-container">
+                            <input type="text" placeholder="Search for Documents, Subjects, or Universities" class="search-bar">
+                            <button class="btn btn-primary"><i class="fas fa-search"></i> Search</button>
+                        </div>
+                    </section>
+                    
+                    <!-- Upload Icon -->
+                    <button class="action-button" onclick="goToAdminLogin()">
+                        <img src="/code/icons/upload.png" alt="Upload" class="action-icon">
+                        <span>Upload</span>
+                    </button>
+
+                    <!-- Notification Icon -->
+                    <div class="notification">
+                        <img src="/code/icons/notification.png" alt="Notification" width="25px" height="30px" class="notification-icon" onclick="toggleNotificationDropdown()">
+                        <div class="notification-dropdown" id="notificationDropdown">
+                            <p>No new notifications!</p>
+                        </div>
+                    </div>
+                    
+                    <!-- Account Section -->
+                    <div class="dropdown">
+                        <img src="/code/imgs/green.jpeg" alt="Profile Picture" class="profile-pic" onclick="toggleProfileDropdown()">
+                        <div class="profile-dropdown" id="profileDropdown">
+                            <a href="#" onclick="openOverlay(); return false;">Account</a>
+                            <a href="#" onclick="openSettingsOverlay(); return false;">Settings</a>
+                            <a href="/code/login/index.html">Logout</a>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Accounts Overlay -->
+            <div id="accountSettingsOverlay" class="overlay">
+                <div class="overlay-content">
+                    <button class="close-btn" onclick="closeOverlay()">&times;</button>
+                    <div class="profile-section">
+                        <img src="/code/imgs/nl2.jpg" alt="Profile Picture" class="profile-pic">
+                        <h2>John Doe</h2>
+                    </div>
+                    
+                    <div class="account-info">
+                        <div class="info-group">
+                            <label>Full Name</label>
+                            <div class="info-box">John Doe</div>
+                        </div>
+                        <div class="info-group">
+                            <label>Email</label>
+                            <div class="info-box">johndoe@example.com</div>
+                        </div>
+                        <div class="info-group">
+                            <label>Password</label>
+                            <div class="info-box">••••••••</div>
+                            <button class="change-password-btn" onclick="togglePasswordChange()">Change Password</button>
+                        </div>
+                    </div>
+            
+                    <div id="passwordChangeSection" style="display: none;">
+                        <div class="form-group">
+                            <label for="newPassword">New Password</label>
+                            <input type="password" id="newPassword" placeholder="Enter new password">
+                            <button class="submit-btn" onclick="changePassword()">Update Password</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Overlay -->
+            <div id="settingsOverlay" class="overlay">
+                <div class="overlay-content">
+                    <button class="close-btn" onclick="closeSettingsOverlay()">&times;</button>
+                    <div class="settings-header">
+                        <h2>Settings</h2>
+                        <!-- <p class="settings-subtitle">Manage your app preferences</p> -->
+                    </div>
+                    
+                    <div class="settings-sections">
+                        <!-- Notifications Section -->
+                        <div class="settings-group">
+                            <label class="settings-label">Notifications</label>
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <span>Email Notifications</span>
+                                        <p class="setting-description">Receive email updates about your library</p>
+                                    </div>
+                                    <label class="toggle">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <span>Due Date Reminders</span>
+                                        <p class="setting-description">Get notified before books are due</p>
+                                    </div>
+                                    <label class="toggle">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Display Section -->
+                        <div class="settings-group">
+                            <label class="settings-label">Display</label>
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <span>Dark Mode</span>
+                                        <p class="setting-description">Switch between light and dark theme</p>
+                                    </div>
+                                    <label class="toggle">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <span>Compact View</span>
+                                        <p class="setting-description">Show more items per page</p>
+                                    </div>
+                                    <label class="toggle">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Language Section -->
+                        <div class="settings-group">
+                            <label class="settings-label">Language & Region</label>
+                            <div class="settings-options">
+                                <div class="setting-item">
+                                    <div class="setting-info">
+                                        <span>Language</span>
+                                        <p class="setting-description">Choose your preferred language</p>
+                                    </div>
+                                    <select class="settings-select">
+                                        <option value="en">English</option>
+                                        <option value="es">Español</option>
+                                        <option value="fr">Français</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Hero Section -->
+            <section class="hero-others">
+                <div class="hero-content">
+                    <h1>Recently Viewed Items</h1>
+                    <p>Your recently viewed books, journals, and documents.</p>
+                </div>
+            </section>
+
+                <!-- Sort Functionality -->
+                <div class="filter" id="books-search">
+                    <form> 
+                        <select name="sort" id="sortFilter">
+                            <option hidden>Filter By</option>
+                            <option value="date">Sort by Date</option>
+                            <option value="title">Sort by Title</option>
+                        </select>
+                        <button class="btn btn-primary" type="submit">Sort</button>
+                    </form>
+                </div>
+                
+                <!-- Books Section -->
+                <div class="recents-page">
+                    <h2>Recently Viewed Books</h2>
+                    <div class="recently-viewed-items">
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-book.png" alt="Book 1">
+                            <h3>Book Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-book.png" alt="Book 2">
+                            <h3>Book Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-journal.png" alt="Book 2">
+                            <h3>Book Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-book.png" alt="Book 2">
+                            <h3>Book Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Journals Section -->
+                <div class="recents-page">
+                    <h2>Recently Viewed Journals</h2>
+                    <div class="recently-viewed-items">
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-journal.png" alt="Journal 1">
+                            <h3>Journal Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-journal.png" alt="Journal 2">
+                            <h3>Journal Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-journal.png" alt="Journal 2">
+                            <h3>Journal Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-journal.png" alt="Journal 2">
+                            <h3>Journal Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                    </div>
+                </div>
+            
+                <!-- Documents Section -->
+                <div class="recents-page">
+                    <h2>Recently Viewed Documents</h2>
+                    <div class="recently-viewed-items">
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-document.png" alt="Document 1">
+                            <h3>Document Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-document.png" alt="Document 2">
+                            <h3>Document Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-document.png" alt="Document 2">
+                            <h3>Document Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                        <div class="recent-card">
+                            <img src="/code/imgs/covers/recent-document.png" alt="Document 2">
+                            <h3>Document Title</h3>
+                            <p>Author Name</p>
+                        </div>
+                    </div>
+                </div>
+            </section>            
+        </main>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Online Library for Students. All rights reserved.</p>
+    </footer>
+
+    <script src="/code/script.js"></script> <!-- Link to your external JS file -->
+</body>
+
+</html>

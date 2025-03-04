@@ -1,0 +1,88 @@
+<!-- signup.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studious | Sign Up</title>
+
+    <link rel="icon" type="image/png" sizes="32x32" href="/code/imgs/favcons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/code/imgs/favcons/favicon-16x16.png">
+    <link rel="manifest" href="/code/imgs/favcons/site.webmanifest">
+
+    <link rel="stylesheet" href="login.css">
+</head>
+<body>
+    <div class="signup-container">
+        <h2>Sign Up</h2>
+        <form id="signupForm" action="#" method="POST">
+            <label id="roleLabel" for="username">Sign Up as Student/Admin</label>
+            <input type="text" id="username" name="username" required placeholder="Username">
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required placeholder="Email">
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required placeholder="Password">
+
+            <label for="confirm-password">Confirm Password</label>
+            <input type="password" id="confirm-password" name="confirm-password" required placeholder="Confirm Password">
+
+            <button type="submit">Sign Up</button>
+            <p class="foot">Already have an account? <a id="loginLink" href="login.html">Log in</a></p>
+        </form>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const params = new URLSearchParams(window.location.search);
+            const role = params.get("role");
+            const form = document.getElementById("signupForm");
+            const loginLink = document.getElementById("loginLink");
+            
+            if (role === "student") {
+                form.action = "/create-student-account";
+                loginLink.href = "login.html?role=student";
+                document.getElementById("roleLabel").textContent = "Sign Up as Student";
+            } else if (role === "admin") {
+                form.action = "/create-admin-account";
+                loginLink.href = "login.html?role=admin";
+                document.getElementById("roleLabel").textContent = "Sign Up as Admin";
+            }
+    
+            // Add event listener for form submission
+            form.addEventListener("submit", function(e) {
+                e.preventDefault(); // Prevent default form submission
+    
+                // Get form values
+                const username = document.getElementById("username").value;
+                const email = document.getElementById("email").value;
+                const password = document.getElementById("password").value;
+                const confirmPassword = document.getElementById("confirm-password").value;
+    
+                // Basic validation
+                if (username && email && password && confirmPassword) {
+                    if (password !== confirmPassword) {
+                        alert("Passwords Do Not Match");
+                        return;
+                    }
+    
+                    // If all validations pass, simulate form submission
+                    alert("Account Created Successfully!"); // Placeholder for actual account creation logic
+                    // You can replace the alert with an actual form submission if needed
+                    form.submit(); // Uncomment if you want to submit the form normally
+    
+                    // Redirect after successful signup
+                    if (role === "student") {
+                        window.location.href = "../student/home-student.html"; // Redirect to student home
+                    } else if (role === "admin") {
+                        window.location.href = "../admin/home-admin.html"; // Redirect to admin home
+                    }
+                } else {
+                    alert("Please Fill In All Fields");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

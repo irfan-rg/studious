@@ -1,0 +1,206 @@
+/* Global Styling */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #283048, #859398);
+    color: #333;
+}
+
+/* Container Styling */
+.container {
+    width: 100%;
+    max-width: 400px;
+    background-color: #f4f4f9;
+    border-radius: 12px;
+    padding: 40px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    animation: fadeIn 0.8s ease;
+}
+
+/* Role Selection Page Styling */
+.role-selection-container {
+    padding: 35px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff, #cfd4c9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.role-selection-container h2 {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 30px;
+    color:#333;
+}
+
+.role-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 23px;
+    margin-top: 10px;
+}
+
+.role-button {
+    padding: 16px;
+    border-radius: 8px;
+    font-size: 20px;
+    font-weight: 550;
+    text-align: center;
+    color: #fff;
+    background-color: #4a90e2;
+    border: none;
+    cursor: pointer;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.role-button:hover {
+    background-color: #4178c2;
+    transform: translateY(-2px);
+}
+
+.role-button.student {
+    background-color: #50c878;
+}
+
+.role-button.admin {
+    background-color: #f76c5e;
+}
+
+
+
+
+
+
+/* Login & Signup Form Styling */
+.login-container {
+    padding: 35px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff, #cfd4c9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.login-container h2 {
+    font-size: 28px;
+    color:#333;
+    margin-bottom: 15px;
+}
+
+.login-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+.signup-container {
+    padding: 35px;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ffffff, #cfd4c9);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.signup-container h2 {
+    font-size: 28px;
+    color:#333;
+    margin-bottom: 15px;
+}
+
+.signup-container form {
+    display: flex;
+    flex-direction: column;
+}
+
+h3 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+    color: aliceblue;
+    margin-bottom: 8px;
+}
+
+label {
+    margin: 15px 0 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-size: 15px;
+    background-color: #eef2f5;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 6px rgba(0, 100, 200, 0.2);
+    outline: none;
+}
+
+button {
+    margin-top: 20px;
+    padding: 14px;
+    border: none;
+    border-radius: 6px;
+    background-color: #4a90e2;
+    color: #fff;
+    font-weight: bold;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+button:hover {
+    background-color: #3b78c1;
+    transform: translateY(-2px);
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+/* Footer Links (for Login/Signup page) */
+.foot {
+    margin-top: 15px;
+    color:#555;
+}
+
+/* Additional Styles for Links */
+a {
+    color: #0077ff;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.foot a:hover {
+    color:#2b5dbb;
+}
+
+/* .container p {
+    margin-top: 20px;
+    font-size: 14px;
+    color: #777;
+}
+
+.container p a {
+    font-weight: bold;
+    color: #f76c5e;
+}
+
+.container p a:hover {
+    color: #d05d51;
+} */
+

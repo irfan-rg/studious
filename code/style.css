@@ -1,0 +1,897 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+/* Layout */
+.container {
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #333;
+    color: #fff;
+    height: 100vh;
+    position: fixed;
+    padding: 10px;
+}
+
+
+/* Sidebar icons */
+.side-icon {
+    width: 24px; /* Adjust size as needed for sidebar icons */
+    height: 24px; /* Adjust size as needed for sidebar icons */
+    margin-right: 10px;
+    vertical-align: middle;
+    margin-top: -6px; /* Move the sidebar icon slightly upwards */
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 30%;
+}
+
+.logo img {
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 8%;
+}
+
+
+nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.nav ul li {
+    margin: 15px 0;
+}
+
+nav a {
+    color: white;
+    font-size:larger;
+    font-family: 'Poppins', sans-serif;
+    font-weight:550;
+    text-decoration: none;
+    display: block;
+    padding: 12px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+nav a:hover {
+    background-color: #444;
+}
+
+
+
+/* Main Content */
+main {
+    margin-left: 250px; /* Space for sidebar */
+    padding: 20px;
+    width: calc(100% - 250px);
+}
+
+.top-header {
+    display: flex;
+    justify-content: flex-end; /* Aligns everything to the right */
+    align-items: center;
+    padding: 0px 20px;
+    padding-bottom: 20px;
+    position: relative;
+    z-index: 10;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    margin-right: -10px; /* Ensure notification and profile stay in place */
+}
+
+
+
+
+
+/* Search Section */
+#search {
+    padding: 0; /* Remove padding to reduce empty space */
+    margin: 0; /* Ensure no margins are pushing the search bar down */
+    display: flex; /* Use flexbox */
+    justify-content: center; /* Center the search container */
+    align-items: center; /* Align items vertically in the center */
+}
+
+.search-container {
+    position: absolute;
+    left: 0;
+    display: flex;
+    max-width: 600px; /* Limit the width of the search container */
+    width: 100%; /* Allow it to fill the available space */
+}
+
+.search-container input {
+    flex-grow: 1; /* Allow the input to take remaining space */
+    padding: 0.75rem; /* Adjust padding */
+    font-size: 1rem; /* Adjust font size */
+    border: 2px solid #ddd; /* Change border color */
+    border-radius: 5px 0 0 5px; /* Rounded left corners */
+    margin-right: -1px; /* To avoid double border with button */
+}
+
+.search-container button {
+    background-color: #5d8aa8; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove border */
+    padding: 0.75rem; /* Match input padding */
+    border-radius: 0 5px 5px 0; /* Rounded right corners */
+    cursor: pointer; /* Change cursor on hover */
+}
+
+.search-container button:hover {
+    background-color: #4b6e82; /* Darker shade on hover */
+}
+
+
+/* Notification Styles */
+.notification {
+    position:relative;
+    display: inline-block;
+    scale: 1.2;
+    margin-right:20px;
+}
+
+.notification-icon {
+    background: none;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 20px; /* Space from the account button */
+}
+
+.notification-dropdown {
+    font-size: 13px;
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    min-width: 200px; /* Set minimum width */
+    border-radius: 5px;
+}
+
+.notification-dropdown p {
+    padding: 10px;
+    margin: 0;
+}
+
+.notification-dropdown .notification-item {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+}
+
+.notification-dropdown .notification-item:last-child {
+    border-bottom: none; /* Remove border for last item */
+}
+
+/* Profile Picture Styles */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-pic {
+    width: 40px; /* Adjust size */
+    height: 40px; /* Adjust size */
+    border-radius: 50%; /* Circular profile picture */
+    cursor: pointer;
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    min-width: 150px; /* Set minimum width */
+    border-radius: 5px;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: black;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f1f1f1; /* Change background on hover */
+}
+
+
+.hero {
+    background-image: url('/code/imgs/nl2.jpg'); /* Replace with your hero image */
+    background-size: cover; /* Ensure the image covers the entire hero section */
+    background-position: center; /* Center the image */
+    height: 75vh; /* Set hero banner height to 3/4 of the screen */
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+    position: relative; /* Position relative to allow absolute positioning of content */
+}
+
+.hero-content {
+    background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for better text visibility */
+    padding: 20px;
+    border-radius: 10px;
+    position: relative; /* Keep this as relative to maintain layout */
+    z-index: 1; /* Ensure content is above the background image */
+}
+
+.hero-others {
+    height: 300px; /* Set a larger height for the Categories hero */
+    background-image: url('/code/imgs/nl2.jpg'); /* Set a background image if needed */
+    background-size: cover; /* Ensure the image covers the whole area */
+    background-position: center; /* Center the background image */
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    text-align: center;
+}
+
+
+
+/* home page items */
+#home .carousel-item {
+    flex: 0 0 20%; /* Max 5 tiles */
+    margin-right: auto;
+}
+
+#home .carousel-item:hover {
+    transform: scale(1.05);
+}
+#home .carousel-section {
+    margin: 20px; /* Center the carousel */
+    width: 98%; /* Full width with some margin */
+    overflow: hidden; /* Hide overflow for the carousel */
+}
+
+footer {
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: white;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Mylibrary Styles */
+#mylib .carousel-section {
+    margin: 0px; /* Center the carousel */
+    width: 98%; /* Full width with some margin */
+    overflow: hidden; /* Hide overflow for the carousel */
+}
+
+#mylib .carousel-container {
+    position: relative; /* Keep buttons positioned relative to this container */
+    overflow: hidden; /* Hide overflow for the carousel */
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+#mylib .carousel {
+    display: flex; /* Flexbox for layout */
+    overflow-x:hidden; /* Allow horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snap effect */
+    padding: 0 0; /* Padding above and below */
+    gap: 0; /* Ensure no extra space between the carousel and items */
+    justify-content: flex-start; /* Align items to the left */
+}
+
+#mylib .carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+#mylib .carousel-item {
+    flex: 0 0 200px; /* Prevent shrinking */
+    max-width: 200px;
+    margin-right: 12px; /* Space between items */
+    background-color: white; /* Background color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    scroll-snap-align: start; /* Align items */
+    padding: 10px; /* Padding inside items */
+    transition: transform 0.3s; /* Smooth scale effect on hover */
+}
+
+Optional hover effect
+#mylib .carousel-item:hover {
+    transform: scale(1.05); 
+}
+
+#mylib .carousel-item img {
+    width: 100%; /* Ensure images fill their container */
+    height: 80%; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+/*corousal button*/
+#mylib .carousel-btn {
+    position: absolute; /* Position buttons absolutely */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    background-color: rgba(255, 255, 255, 0.8); /* Background for visibility */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    z-index: 10; /* Ensure buttons are above carousel items */
+    padding: 10px; /* Button padding */
+}
+
+#mylib .carousel-btn.left {
+    left: -10px; /* Adjusted left button to be outside the items */
+}
+
+#mylib .carousel-btn.right {
+    right: -10px; /* Adjusted right button to be outside the items */
+}
+
+#mylib .carousel-btn:hover {
+    background-color: rgba(255, 255, 255, 1); /* Change color on hover */
+}
+
+
+
+
+
+
+
+.book-list {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding: 20px 0;
+}
+
+.book-card {
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 200px;
+}
+
+.book-card img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.read-btn {
+    background-color: #5d8aa8;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.categories {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.category-card {
+    background-color:#5d8aa8;
+    color: white;
+    padding: 20px;
+    border-radius: 5px;
+    width: 150px;
+    text-align: center;
+}
+
+
+
+/* Carousel Styles */
+.carousel-section {
+    margin: 20px; /* Center the carousel */
+    width: 98%; /* Full width with some margin */
+    overflow: hidden; /* Hide overflow for the carousel */
+}
+
+.carousel-container {
+    position: relative; /* Keep buttons positioned relative to this container */
+    overflow: hidden; /* Hide overflow for the carousel */
+    width: 100%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+.carousel {
+    display: flex; /* Flexbox for layout */
+    overflow-x: auto; /* Allow horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Enable snap effect */
+    padding: 20px 0; /* Padding above and below */
+    gap: 0; /* Ensure no extra space between the carousel and items */
+    justify-content: flex-start; /* Align items to the left */
+}
+
+.carousel::-webkit-scrollbar {
+    display: none; /* Hide scrollbar */
+}
+
+.carousel-item {
+    flex: 0 0 200px; /* Prevent shrinking */
+    max-width: 200px;
+    margin-right: 11px; /* Space between items */
+    background-color: white; /* Background color */
+    border-radius: 5px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Shadow effect */
+    scroll-snap-align: start; /* Align items */
+    padding: 10px; /* Padding inside items */
+    transition: transform 0.3s; /* Smooth scale effect on hover */
+}
+
+/* Optional hover effect */
+.carousel-item:hover {
+    transform: scale(1.05); /* Scale effect on hover */
+}
+
+.carousel-item img {
+    width: 100%; /* Ensure images fill their container */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 5px; /* Rounded corners for images */
+}
+
+/*corousal button*/
+.carousel-btn {
+    position: absolute; /* Position buttons absolutely */
+    top: 50%; /* Center vertically */
+    transform: translateY(-50%); /* Adjust for vertical centering */
+    background-color: rgba(255, 255, 255, 0.8); /* Background for visibility */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer; /* Pointer cursor on hover */
+    z-index: 10; /* Ensure buttons are above carousel items */
+    padding: 10px; /* Button padding */
+}
+
+.carousel-btn.left {
+    left: -10px; /* Adjusted left button to be outside the items */
+}
+
+.carousel-btn.right {
+    right: -10px; /* Adjusted right button to be outside the items */
+}
+
+.carousel-btn:hover {
+    background-color: rgba(255, 255, 255, 1); /* Change color on hover */
+}
+
+
+
+
+
+
+
+
+
+/*Categories Page Style Sheet*/
+.branch {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 50px 0;
+}
+
+.branch-card {
+    background-color: white;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in;
+}
+
+.branch-card img {
+    width:100%;
+    height: 60%;
+    border-radius: 5px;
+}
+
+.branch-card h3 {
+    margin: 10px 0 0;
+    font-size:larger;
+}
+
+.branch-card:hover {
+    transform: scale(1.05);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Search & Filter Styles for Books Page */
+#books-search-filter {
+    margin-top: 25px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 30px;
+}
+
+#books-search-filter h2 {
+    margin-top: 5px;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#books-search-filter form {
+    display: flex;
+    flex-direction: column;
+}
+
+#books-search-filter .search-bar {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+select {
+    padding: 12px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.btn {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+
+
+/* Styles for Books Page */
+#books-custom .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    padding: 50px 0;
+    justify-content: flex-start; /* Start items from the left */
+}
+
+/* Category Card Styles for Books Page */
+#books-custom .category-card {
+    align-items: flex-start;
+    background-color: rgb(249, 249, 249);
+    border-radius: 8px;
+    padding: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    transition: transform 0.3s ease-in;
+}
+
+#books-custom .category-card img {
+    width: 100%;
+    height: 60%;
+    border-radius: 5px;
+}
+
+#books-custom .category-card h3 {
+    padding: 10px;
+    font-size: 18px;
+    color: #333;
+}
+
+.book-card:hover {
+    transform: scale(1.05); /* Scale up the tile slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    border-radius: 8px;
+}
+
+.category-card:hover {
+    transform: scale(1.05); /* Scale up the tile slightly */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Increase shadow on hover */
+    border-radius: 8px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Style for Recents Page */
+
+.filter{
+    padding-top: 23px;
+    margin-left: 5px;
+}
+
+.recently-viewed-section h3{
+    font-size: x-large;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+.recently-viewed {
+    padding: 20px;
+}
+
+.sort-container {
+    margin-bottom: 20px;
+}
+
+.sort-container label {
+    margin-right: 10px;
+}
+
+.recently-viewed-items {
+    display: flex; /* Keep horizontal layout */
+    overflow-x: auto; /* Allow horizontal scrolling if needed */
+    padding: 10px 0; /* Add some padding */
+}
+
+.recent-card {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px; /* Slightly reduce padding */
+    margin-right: 15px; /* Space between cards */
+    width: 200px; /* Set a smaller minimum width for cards */
+    flex-shrink: 0; /* Prevent cards from shrinking */
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s; /* Add transition for hover effect */
+}
+
+.recent-card:hover {
+    transform: translateY(-5px); /* Lift the card on hover */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+.recent-card img {
+    width: 100%; /* Set the width of the image to be less than the card */
+    height: 60%; /* Keep the aspect ratio */
+    border-radius: 5px;
+}
+
+.recent-card h3 {
+    font-size: 1em; /* Reduce font size */
+    margin: 5px 0 5px;
+}
+
+.recent-card p {
+    color: #666;
+    font-size: 0.9em; /* Slightly smaller font size for the description */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* About Content Styles */
+.about-content {
+    margin-top: 20px;
+    background: #fff;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.section {
+    margin-bottom: 50px;
+}
+
+hr{
+    margin:50px 0px ;
+}
+
+.section h2 {
+    text-align: center;
+    font-size: 1.8em;
+    color: black;
+    margin-bottom: 18px;
+}
+
+.section p {
+    font-size:110%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    line-height: 1.6;
+}
+
+.team-member-wrapper {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.team-member {
+    flex: 1 1 200px;
+    min-height: 120px; /* Increased to accommodate stacked text */
+    margin: 10px;
+    display: flex;
+    align-items: center; /* Centers items vertically */
+    background: #ecf0f1;
+    border-radius: 6px;
+    padding: 10px;
+    transition: background 0.3s;
+}
+
+.team-member:hover {
+    background: #d5dbdb;
+}
+
+.team-photo {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    margin-right: 15px;
+    border: 3px solid #2980b9;
+}
+
+/* New styles for the text container */
+.member-info {
+    display: flex;
+    flex-direction: column; /* Stacks the text vertically */
+    justify-content: center;
+}
+
+.member-info h3 {
+    margin: 0 0 5px 0; /* Adds space between name and role */
+    font-size: 1.1rem;
+    color: #333;
+}
+
+.member-info p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.contact h2 {
+    text-align: center;
+    font-size: 1.8em;
+    color: black;
+    margin-bottom: 10px;
+    margin-top: -0.5cm;
+}
+
+.contact p {
+    text-align:center;
+    font-size:110%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-weight: 600;
+    line-height: 2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
