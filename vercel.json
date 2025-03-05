@@ -1,8 +1,19 @@
 {
-    "rewrites": [
-      { "source": "/admin", "destination": "/admin/home-admin.html" },
-      { "source": "/login", "destination": "/login/index.html" },
-      { "source": "/student", "destination": "/student/home-student.html" },
-      { "source": "/(.*)", "destination": "/index.html" }
-    ]
-  }
+  "redirects": [
+    {
+      "source": "/login",
+      "destination": "/login/index.html",
+      "permanent": true
+    },
+    {
+      "source": "/student",
+      "destination": "/student/home-student.html",
+      "permanent": true
+    },
+    {
+      "source": "/admin",
+      "destination": "/admin/home-admin.html",
+      "permanent": true
+    }
+  ]
+}

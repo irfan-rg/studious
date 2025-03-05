@@ -50,9 +50,9 @@
     
                 if (username && password) {
                     if (role === "student") {
-                        window.location.href = redirect || "/student/home-student.html";
+                        window.location.href = "/student/home-student.html";
                     } else if (role === "admin") {
-                        window.location.href = redirect || "/admin/home-admin.html";
+                        window.location.href = "/admin/home-admin.html";
                     } else {
                         alert("Please Select a Role (Student or Admin)");
                     }
