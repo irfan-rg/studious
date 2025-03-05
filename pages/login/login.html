@@ -44,20 +44,18 @@
     
             form.addEventListener("submit", function(e) {
                 e.preventDefault();
-    
                 const username = document.getElementById("username").value;
                 const password = document.getElementById("password").value;
-    
                 if (username && password) {
                     if (role === "student") {
-                        window.location.href = "/student/home-student.html";
+                        window.location.href = "https://your-username.github.io/studious-library/student/home-student.html";
                     } else if (role === "admin") {
-                        window.location.href = "/admin/home-admin.html";
+                        window.location.href = "https://your-username.github.io/studious-library/admin/home-admin.html";
                     } else {
                         alert("Please Select a Role (Student or Admin)");
                     }
                 } else {
-                    alert("Please Enter Username and Password");
+                alert("Please Enter Username and Password");
                 }
             });
         });

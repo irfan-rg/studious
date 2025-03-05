@@ -50,31 +50,26 @@
             }
     
             form.addEventListener("submit", function(e) {
-                e.preventDefault();
-    
-                const username = document.getElementById("username").value;
-                const email = document.getElementById("email").value;
-                const password = document.getElementById("password").value;
-                const confirmPassword = document.getElementById("confirm-password").value;
-    
-                if (username && email && password && confirmPassword) {
-                    if (password !== confirmPassword) {
-                        alert("Passwords Do Not Match");
-                        return;
-                    }
-    
-                    alert("Account Created Successfully!");
-                    form.submit();
-    
-                    if (role === "student") {
-                        window.location.href = "/student/home-student.html";
-                    } else if (role === "admin") {
-                        window.location.href = "/admin/home-admin.html";
-                    }
-                } else {
-                    alert("Please Fill In All Fields");
+            e.preventDefault();
+            const username = document.getElementById("username").value;
+            const email = document.getElementById("email").value;
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm-password").value;
+            if (username && email && password && confirmPassword) {
+                if (password !== confirmPassword) {
+                    alert("Passwords Do Not Match");
+                    return;
                 }
-            });
+                alert("Account Created Successfully!");
+                if (role === "student") {
+                    window.location.href = "https://your-username.github.io/studious-library/student/home-student.html";
+                } else if (role === "admin") {
+                    window.location.href = "https://your-username.github.io/studious-library/admin/home-admin.html";
+                }
+            } else {
+                alert("Please Fill In All Fields");
+            }
+        });
         });
     </script>
 </body>
